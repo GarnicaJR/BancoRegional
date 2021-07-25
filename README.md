@@ -1,8 +1,28 @@
-# Project com.bank/BancoRegional
+# Proyecto com.bank/BancoRegional
 
-Steps to run this project:
 
-1. Start your Docker daemon
-2. Execute `./buildAndRun.sh` (Linux/MacOs) or `buildAndRun.bat` (Windows)
-3. Wait until Open Liberty is up- and running (e.g. use `docker logs -f CONTAINER_ID`)
-4. Visit http://localhost:9080/resources/sample
+
+## Configura datasource de Mysql 8
+
+Configura el data source en payara 5 
+
+```
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.2" xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd">
+  <persistence-unit name="BankDB_PU" transaction-type="JTA">
+    <jta-data-source>jdbc/BankDB</jta-data-source>
+    <class>com.bank.bancoregional.api.repository.ClienteRepository</class>
+    <class>com.bank.bancoregional.api.entity.Cliente</class>
+    <exclude-unlisted-classes>false</exclude-unlisted-classes>
+    <properties>
+      <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>
+    </properties>
+  </persistence-unit>
+</persistence>
+```
+
+
+## Correr la aplicacion desde Netbeans 12
+
+Arranca la aplicacion desde netbeans 12 
+
